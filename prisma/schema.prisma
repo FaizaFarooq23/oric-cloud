@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  account_number Int @id @default(autoincrement())
+  username String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  faculty Faculty[]
+  admin  Admin[]
+  access_logs AccessLogs[]
+}
+
+model Faculty {
+  account_number Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  email String @unique @db.VarChar(255)
+  department String @unique @db.VarChar(255)
+  date_of_birth DateTime @db.DateTime(6)
+  qualification String @db.VarChar(30)
+  designation String @db.VarChar(30)
+  cnic String @unique @db.VarChar(30)
+  contact_number String @unique @db.VarChar(30)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
+}
+
+model Admin {
+    account_number Int @id @default(autoincrement())
+    email String @unique @db.VarChar(255)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+    account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
+}
+
+model AccessLogs {
+  id Int @id @default(autoincrement())
+  account_number Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
+}
+
+model ResearchProject {
+  project_id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  description String? @db.VarChar(255)
+  submission_date DateTime @db.DateTime(6)
+  start_date DateTime @db.DateTime(6)
+  end_date DateTime? @db.DateTime(6)
+  status String @db.VarChar(30)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  achievement Achievement[]
+  misc Misc[]
+}
+
+model Achievement {
+  achievement_id Int @id @default(autoincrement())
+  project_id Int
+  category String @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  research_project ResearchProject @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
+}
+
+model Misc {
+  misc_id Int @id @default(autoincrement())
+  project_id Int
+  type String @db.VarChar(255)
+  industory String @db.VarChar(255)
+  details String? @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  research_project ResearchProject @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
+}

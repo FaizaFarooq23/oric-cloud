@@ -1,9 +1,13 @@
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 export default function Login({ adminLogin, facultyLogin, setAdminLogin }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState({ show: false, message: "" });
+  const router = useRouter();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -11,33 +15,31 @@ export default function Login({ adminLogin, facultyLogin, setAdminLogin }) {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading({ show: true, message: "Logging in..." });
-    if (email === "" || password === "") {
+    if (username === "" || password === "") {
       setLoading({ show: false, message: "" });
       alert("Please fill all the fields");
       return;
     }
-    if (adminLogin) {
-      if (email === "admin" && password === "admin") {
-        setLoading({ show: false, message: "" });
-        setAdminLogin(false);
-        return;
-      } else {
-        setLoading({ show: false, message: "" });
-        alert("Wrong Credentials");
-        return;
-      }
-    }
-    if (email === "faculty" && password === "faculty") {
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      username: username,
+      password: password,
+    });
+    console.log(res);
+
+    if (res.status === 200) {
       setLoading({ show: false, message: "" });
-      setAdminLogin(true);
-      return;
-    } else {
-      setLoading({ show: false, message: "" });
-      alert("Wrong Credentials");
-      return;
+      router.push("/dashboard");
     }
+    if (res.status === 401) {
+      setLoading({ show: false, message: "" });
+      alert(res.error);
+    }
+
+
   };
 
   return (
@@ -52,15 +54,15 @@ export default function Login({ adminLogin, facultyLogin, setAdminLogin }) {
           </div>
         </div>
         <div
-         // style={{ backgroundImage: `url("images/chart.gif")` }}
+          // style={{ backgroundImage: `url("images/chart.gif")` }}
           className=" w-full gap-x-16 border-t border-slate-300 relative z-10 flex justify-between items-end pt-16 px-12 bg-white "
         >
-                    <video
+          <video
             autoPlay
             loop
             muted
             style={{
-            height: "76%",
+              height: "76%",
               width: "100%",
               position: "absolute",
               top: 0,
@@ -77,11 +79,11 @@ export default function Login({ adminLogin, facultyLogin, setAdminLogin }) {
                   htmlFor="username"
                   className="block text-sm font-medium text-blue-900"
                 >
-                  {!facultyLogin ? "Username" : "Email"}
+                  Username
                 </label>
                 <input
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setUsername(e.target.value);
                   }}
                   id="username"
                   name="username"
