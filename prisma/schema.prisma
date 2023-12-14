@@ -8,7 +8,9 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  
 }
+
 
 model Account {
   account_number Int @id @default(autoincrement())
@@ -16,15 +18,14 @@ model Account {
   password String @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  faculty Faculty[]
-  admin  Admin[]
   access_logs AccessLogs[]
 }
 
 model Faculty {
-  account_number Int @id @default(autoincrement())
   name String @db.VarChar(255)
   email String @unique @db.VarChar(255)
+  username String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
   department String @unique @db.VarChar(255)
   date_of_birth DateTime @db.DateTime(6)
   qualification String @db.VarChar(30)
@@ -33,15 +34,14 @@ model Faculty {
   contact_number String @unique @db.VarChar(30)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
 }
 
 model Admin {
-    account_number Int @id @default(autoincrement())
     email String @unique @db.VarChar(255)
+    username String @unique @db.VarChar(255)
+    password String @db.VarChar(255)
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
-    account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
 }
 
 model AccessLogs {
@@ -51,6 +51,7 @@ model AccessLogs {
   updated_at DateTime @updatedAt
   account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
 }
+
 
 model ResearchProject {
   project_id Int @id @default(autoincrement())

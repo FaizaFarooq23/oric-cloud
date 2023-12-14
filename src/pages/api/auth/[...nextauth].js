@@ -27,6 +27,8 @@ export default NextAuth({
                 const username = credentials.username
                 const password = credentials.password
 
+                
+
 
                 const user = await prisma.Account.findFirst({
                     where: {
@@ -37,6 +39,14 @@ export default NextAuth({
                     //Compare the hash
                     console.log(user)
                     if (password === user.password) {
+                        const res = await prisma.AccessLogs.create(
+                            {
+                                data: {
+                                    account_number: user.account_number,
+                                    updated_at: new Date(),
+                                }
+                            }
+                        )
                         return user;
                     } else {
                         throw new Error("Invalid Password");
