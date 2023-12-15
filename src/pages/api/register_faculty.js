@@ -1,3 +1,5 @@
+import prisma from "@/lib/prisma";
+
 // pages/api/register.js
 export default async function handler(req, res) {
     if (req.method === 'POST') {
@@ -25,7 +27,7 @@ export default async function handler(req, res) {
   
       // TODO: Add your registration logic here
       // Example: Save user data to a database
-      const res = await prisma.Faculty.create(
+      const result = await prisma.Faculty.create(
         {
           data: {
             name: name,
@@ -38,6 +40,7 @@ export default async function handler(req, res) {
             qualification: qualification,
             designation: designation,
             cnic: cnic,
+            updated_at: new Date(),
           }
         }
       )

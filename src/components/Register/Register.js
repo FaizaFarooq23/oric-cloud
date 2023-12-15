@@ -61,17 +61,17 @@ export default function Register() {
           </div>
         </div>
         <div className="w-full gap-x-16 gap-y-2 border-t border-slate-300 flex flex-wrap justify-center  pt-8 px-12 bg-white ">
-          <FormInput lable={"Name"} value={name} setVal={setName} />
-          <FormInput lable={"Email"} value={email} setVal={setEmail} />
-          <FormInput lable={"CNIC"} value={cnic} setVal={setCnic} />
-          <FormInput lable={"Phone Number"} value={phoneNumber} setVal={setPhoneNumber} />
-          <FormInput lable={"Username"} value={username} setVal={setUsername} />
-          <FormInput lable={"Department"} value={department} setVal={setDepartment} />
-          <FormInput lable={"Date of Birth"} value={dateOfBirth} setVal={setDateOfBirth} />
-          <FormInput lable={"Qualification"} value={qualification} setVal={setQualification} />
-          <FormInput lable={"Designation"} value={designation} setVal={setDesignation}/>
-          <FormInput lable={"Password"} value={password} setVal={setPassword}/>
-          <FormInput lable={"Confirm Password"} value={confirmPassword} setVal={setConfirmPassword} />
+          <FormInput lable={"Name"} value={name} type={"text"} setVal={setName} />
+          <FormInput lable={"Email"} value={email} type={"email"} setVal={setEmail} />
+          <FormInput lable={"CNIC"} value={cnic} type={"text"} setVal={setCnic} />
+          <FormInput lable={"Phone Number"} value={phoneNumber} type={"text"} setVal={setPhoneNumber} />
+          <FormInput lable={"Username"} value={username} type={"text"} setVal={setUsername} />
+          <FormInput lable={"Department"} value={department} type={"text"} setVal={setDepartment} />
+          <FormInput lable={"Date of Birth"} value={dateOfBirth} type={"date"} setVal={setDateOfBirth} />
+          <FormInput lable={"Qualification"} value={qualification} type={"text"} setVal={setQualification} />
+          <FormInput lable={"Designation"} value={designation} type={"text"} setVal={setDesignation}/>
+          <FormInput lable={"Password"} value={password} type={"password"} setVal={setPassword}/>
+          <FormInput lable={"Confirm Password"} value={confirmPassword} type={"password"} setVal={setConfirmPassword} />
         </div>
 
         <div className="w-full flex justify-center  items-center py-8">
