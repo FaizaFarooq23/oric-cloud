@@ -62,10 +62,10 @@ export default function Register() {
         </div>
         <div className="w-full gap-x-16 gap-y-2 border-t border-slate-300 flex flex-wrap justify-center  pt-8 px-12 bg-white ">
           <FormInput lable={"Name"} value={name} setVal={setName} />
+          <FormInput lable={"Username"} value={username} setVal={setUsername} />
           <FormInput lable={"Email"} value={email} setVal={setEmail} />
           <FormInput lable={"CNIC"} value={cnic} setVal={setCnic} />
           <FormInput lable={"Phone Number"} value={phoneNumber} setVal={setPhoneNumber} />
-          <FormInput lable={"Username"} value={username} setVal={setUsername} />
           <FormInput lable={"Department"} value={department} setVal={setDepartment} />
           <FormInput lable={"Date of Birth"} value={dateOfBirth} setVal={setDateOfBirth} />
           <FormInput lable={"Qualification"} value={qualification} setVal={setQualification} />
