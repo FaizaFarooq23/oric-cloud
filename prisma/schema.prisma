@@ -1,6 +1,12 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+
+
+// After migration, run prisma generate to update the Prisma Client.
+// Also run the sql script stored in the sql folder to create triggers in the database
+
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,7 +14,6 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-  
 }
 
 
@@ -17,7 +22,7 @@ model Account {
   username String @unique @db.VarChar(255)
   password String @db.VarChar(255)
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
   access_logs AccessLogs[]
 }
 
@@ -33,7 +38,7 @@ model Faculty {
   cnic String @unique @db.VarChar(30)
   contact_number String @unique @db.VarChar(30)
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
 }
 
 model Admin {
@@ -41,14 +46,14 @@ model Admin {
     username String @unique @db.VarChar(255)
     password String @db.VarChar(255)
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now())
 }
 
 model AccessLogs {
   id Int @id @default(autoincrement())
   account_number Int
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
   account Account @relation(fields: [account_number], references: [account_number], onDelete: Cascade)
 }
 
@@ -62,7 +67,7 @@ model ResearchProject {
   end_date DateTime? @db.DateTime(6)
   status String @db.VarChar(30)
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
 
   achievement Achievement[]
   misc Misc[]
@@ -73,7 +78,7 @@ model Achievement {
   project_id Int
   category String @db.VarChar(255)
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
 
   research_project ResearchProject @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
 }
@@ -85,7 +90,7 @@ model Misc {
   industory String @db.VarChar(255)
   details String? @db.VarChar(255)
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now())
 
   research_project ResearchProject @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
 }

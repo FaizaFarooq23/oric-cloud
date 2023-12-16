@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormInput({lable,value, setVal}) {
+export default function FormInput({lable,value, setVal, type}) {
   return (
     <div><div>
     <label
@@ -12,7 +12,7 @@ export default function FormInput({lable,value, setVal}) {
     <input
       onChange={(e) => setVal(e.target.value)}
       defaultValue={value}
-      type="text"
+      type={type}
       autoComplete="off"
       required
       className="relative block w-full mt-2 appearance-none rounded-none bg-transparent
