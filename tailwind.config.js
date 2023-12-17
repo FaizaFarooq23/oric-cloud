@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         "div-gray": "#F5F5F7",
+        "mustard-yellow": "#FFC42A",
 
       },  
 
