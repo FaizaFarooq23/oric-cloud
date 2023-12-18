@@ -51,42 +51,63 @@ export default function Register() {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-between  ">
-    <div className=" flex flex-col items-center ">
-      <div className="flex justify-between items-center px-12 ">
-        <div className="flex justify-center ">
-          <img src="images/white-logo.png" alt="logo" className="h-24 " />
-        </div>
-      </div>
-    
-        <div
-        className=" w-screen py-10  gap-y-8 border-t px-36  "
-      >
-        <div className=" h-full grid grid-cols-3 gap-x-4">
-          <FormInput lable={"Name"} value={name} type={"text"} setVal={setName} />
-          <FormInput lable={"Username"} value={username} type={"text"} setVal={setUsername} />
-          <FormInput lable={"Email"} value={email} type={"email"} setVal={setEmail} />
-          <FormInput lable={"CNIC"} value={cnic} type={"text"} setVal={setCnic} />
-          <FormInput lable={"Phone Number"} value={phoneNumber} type={"text"} setVal={setPhoneNumber} />
-          <FormInput lable={"Department"} value={department} type={"text"} setVal={setDepartment} />
-          <FormInput lable={"Date of Birth"} value={dateOfBirth} type={"date"} setVal={setDateOfBirth} />
-          <FormInput lable={"Qualification"} value={qualification} type={"text"} setVal={setQualification} />
-          <FormInput lable={"Designation"} value={designation} type={"text"} setVal={setDesignation}/>
-          <FormInput lable={"Password"} value={password} type={"password"} setVal={setPassword}/>
-          <FormInput lable={"Confirm Password"} value={confirmPassword} type={"password"} setVal={setConfirmPassword} />
+      <div className=" flex flex-col items-center ">
+        <div className="flex justify-between items-center px-12 ">
+          <div className="flex justify-center ">
+            <img src="images/white-logo.png" alt="logo" className="h-24 " />
           </div>
-          <div className="w-full flex justify-center  items-center py-8">
-          <button
-          onClick={handleRegister}
-            className="flex w-[60%] justify-center border border-transparent
-            bg-mustard-yellow py-2 px-4 text-sm font-medium text-blue-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Register
-          </button>
         </div>
-        </div>
+        <div
+       // style={{ backgroundImage: `url("images/")` }}
+          className=" w-screen  h-full pt-[3%] gap-x-16 border-t flex justify-between items-center pl-40 pr-20 "
+        >
+                 
+                 <div className="w-[600px] h-full bg-white py-10 px-10 flex flex-col gap-y-5 rounded-xl">
+            <div className=" flex gap-x-4 gap-y-5">
+              <FormInput lable={"Name"} value={name} type={"text"} setVal={setName} />
+              <FormInput lable={"Username"} value={username} type={"text"} setVal={setUsername} />
+            </div>
+            <div className=" flex gap-x-4 gap-y-5">
+              <FormInput lable={"Password"} value={password} type={"password"} setVal={setPassword} />
+              <FormInput lable={"Confirm Password"} value={confirmPassword} type={"password"} setVal={setConfirmPassword} />
+            </div>
+            <div className=" flex gap-x-4 gap-y-5">
+              <FormInput lable={"Email"} value={email} type={"email"} setVal={setEmail} />
+              <FormInput lable={"Date of Birth"} value={dateOfBirth} type={"date"} setVal={setDateOfBirth} />
+            </div>
+            <div className=" flex gap-x-4 gap-y-5">
+              <FormInput lable={"CNIC"} value={cnic} type={"text"} setVal={setCnic} />
+              <FormInput lable={"Phone Number"} value={phoneNumber} type={"text"} setVal={setPhoneNumber} />
+            </div>
+            <div className=" flex gap-x-4 gap-y-5 ">
+            <FormInput lable={"Department"} value={department} type={"text"} setVal={setDepartment} />
+              <FormInput lable={"Qualification"} value={qualification} type={"text"} setVal={setQualification} />
+              <FormInput lable={"Designation"} value={designation} type={"text"} setVal={setDesignation} />
+               </div>
 
+            <div className="w-full flex justify-center items-center mt-10">
+              <button
+                onClick={handleRegister}
+                className="flex w-[60%] justify-center border border-transparent
+            bg-mustard-yellow py-2 px-4 text-sm font-medium text-blue-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Register
+              </button>
+            </div>
+          </div>
        
+
+          <div className="w-[40%]">
+            <div className="flex justify-end">
+          <img src="images/illustration.png" alt="man" className="h-96 pt-16 " />
+          </div>
+
+           
+          </div>
+        </div>
       </div>
+  
     </div>
+
   );
 }

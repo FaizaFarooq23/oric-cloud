@@ -4,7 +4,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div className='flex flex-col justify-between items-center bg-blue-900 h-screen'>
+    <div className='flex flex-col justify-between items-center bg-blue-900 h-full'>
       <div className='z-50'>
       <Login />
       </div>
