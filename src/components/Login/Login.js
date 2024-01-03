@@ -28,7 +28,7 @@ export default function Login({ adminLogin, facultyLogin, setAdminLogin }) {
       username: username,
       password: password,
     });
-    console.log(res);
+   // console.log(res);
 
     if (res.status === 200) {
       setLoading({ show: false, message: "" });

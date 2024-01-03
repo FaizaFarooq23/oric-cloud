@@ -4,7 +4,7 @@ import ProjectStatus from "./components/HamburgarComponents/ProjectStatus";
 
 export default function Hamburgar() {
   return (
-    <div className="mx-12 w-[40%] flex flex-col gap-y-6">
+    <div className="mx-12  flex flex-col gap-y-6">
      <Welcome/>
      <ProjectStatus/>
      <div className="text-xl font-bold">

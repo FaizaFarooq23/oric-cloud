@@ -5,7 +5,7 @@ import PersonalData from './components/RightPanel/PersonalData'
 
 export default function RightPanel() {
   return (
-    <div className='flex flex-col w-[40%] mt-8 gap-y-4 pr-6'>
+    <div className='flex flex-col  mt-8 gap-y-4 pr-6'>
         <Search/>
         <PersonalData completed={11} inProgress={4} />
         <Chart/>

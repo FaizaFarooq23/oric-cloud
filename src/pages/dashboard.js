@@ -1,14 +1,16 @@
+import Baselayout from '@/components/Baselayout/Baselayout'
 import Hamburgar from '@/components/Dashboard/Hamburgar'
 import RightPanel from '@/components/Dashboard/RightPanel'
-import Sidebar from '@/components/Sidebar/Sidebar'
 import React from 'react'
 
 export default function dashboard() {
   return (
-    <div className='flex my-1'>
-      <Sidebar/>
-      <Hamburgar/>
+   <Baselayout >
+      <div className='flex justify-center gap-x-6'>
+        <Hamburgar/>
       <RightPanel/>
-    </div>
+      </div>
+    </Baselayout>
+ 
   )
 }

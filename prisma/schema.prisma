@@ -1,8 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-
-
 // After migration, run prisma generate to update the Prisma Client.
 // Also run the sql script stored in the sql folder to create triggers in the database
 

@@ -37,7 +37,6 @@ export default NextAuth({
                 })
                 if (user !== null && user !== undefined && user.length !== 0) {
                     //Compare the hash
-                    console.log(user)
                     if (password === user.password) {
                         const res = await prisma.AccessLogs.create(
                             {
@@ -70,16 +69,14 @@ export default NextAuth({
         async jwt({ token, user }) {
             // Persist the OAuth access_token to the token right after signin
             if (user) {
-                token.email = user.email
-                token.accessToken = user.token
-                token.role = user.role
+                token.user = user
+               //token.accessToken = user.token
+                //token.role = 'Faculty'
             }
             return token
         },
         async session({ session, token }) {
-            session.user.email = token.email
-            session.user.token = token.accessToken
-            session.user.role = token.role
+            session.user = token.user
             return session
         },
     }
