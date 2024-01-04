@@ -1,10 +1,12 @@
-import React from 'react'
+import { UserContext } from '@/context/UserContext/GlobalProvider';
+import React, { useContext } from 'react'
 
 export default function Welcome() {
+  const {user} = useContext(UserContext);
   return (
     <div className="flex justify-between items-center bg-div-gray px-4 mt-8 rounded-lg">
         <div className="flex flex-col" >
-          <span className="text-2xl font-bold">Hello Faiza!</span>
+          <span className="text-2xl font-bold">Hello {user.name}!</span>
           <span>Its good to see you again.</span>
         </div>
         <div className="mr-4">

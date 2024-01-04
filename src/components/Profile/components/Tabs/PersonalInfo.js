@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DataDisplay from "../Common/DataDisplay";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { UserContext } from "@/context/UserContext/GlobalProvider";
 
 
 
@@ -40,39 +41,49 @@ const contactInfo = [
   },
 ]
 
+function calculate_age(dob) { 
+  var diff_ms = Date.now() - dob.getTime();
+  var age_dt = new Date(diff_ms); 
+
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+
 
 export default function PersonalInfo() {
-  const [personalInfo, setPersonalInfo] = useState(true);
-  const {data: session} = useSession();
+  const [personalInfo, setPersonalInfo] = useState(false);
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`/api/faculty/get_faculty` , {
-          params: {
-            username: session.user.username,
-          }
-        });
-        console.log(res)
-        //setPersonalInfo(res);
-      } catch (error) {
-        console.error("Error fetching personal information:", error);
+    console.log(user)
+    const data = [
+      {
+        label:"Name",
+        value:user.name,
+      },
+      {
+        label: "Age",
+        value: calculate_age(new Date(user.date_of_birth)),
+      },
+      {
+        label: "Designation",
+        value: user.designation,
+      },
+      {
+        label: "Department",
+        value: user.department,
       }
-    };
-    if(session){
-      console.log(session)
-      fetchData();
-    }
-  }, []);
+    ]
 
+    setPersonalInfo(data);
 
+  }, [user]);
 
 
   return (
     <div className="">
       {personalInfo ? (
       <div className="flex gap-x-10">  
-      {/* <DataDisplay data={data} heading={"Personal Information"} /> */}
+      <DataDisplay data={personalInfo} heading={"Personal Information"} />
         <DataDisplay data={contactInfo} heading={"Contact Information" }/>
         </div>
       ) : (

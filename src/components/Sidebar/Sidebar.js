@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaHouse } from "react-icons/fa6";
 import { PiHouse } from "react-icons/pi";
 import {
@@ -9,10 +9,12 @@ import {
 } from "react-icons/io5";
 import Router, { useRouter } from "next/router";
 import { MdOutlineImageSearch, MdOutlineSmartToy } from "react-icons/md";
+import { UserContext } from "@/context/UserContext/GlobalProvider";
+import { signOut } from "next-auth/react"
 
 export default function Sidebar() {
   const router = useRouter();
-
+  const {logoutUser} = useContext(UserContext);
   const handleProfileClick = () => {
     Router.push("/profile");
   };
@@ -23,6 +25,8 @@ export default function Sidebar() {
   };
 
   const handleLogout = () => {
+    logoutUser();
+    signOut();
     Router.push("/");
   };
 

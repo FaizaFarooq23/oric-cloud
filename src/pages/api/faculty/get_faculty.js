@@ -5,10 +5,9 @@ export default async function handler(req, res) {
       // Extract data from the request body
     const faculty = await prisma.faculty.findFirst({
         where: {
-          username: req.query.username,
+          email: req.query.username,
         },
     })     
-
     if (faculty) {
         return res.status(200).json({ message: 'Faculty found', faculty: faculty });
     } else {

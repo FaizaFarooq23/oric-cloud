@@ -1,10 +1,15 @@
 import Baselayout from '@/components/Baselayout/Baselayout'
 import Profile from '@/components/Profile/Profile'
-import React, { useState } from 'react'
+import { UserContext } from '@/context/UserContext/GlobalProvider';
+import React, { useContext, useState } from 'react'
 
 export default function Index() {
   const [profilePhoto, setProfilePhoto] = useState('images/profile.png');
   const [coverPhoto, setCoverPhoto] = useState('images/cover.png');
+  const {user} = useContext(UserContext);
+  
+
+  console.log(user);
 
   const handleProfilePhotoUpload= (event) => {
     const selectedImage = event.target.files && event.target.files[0];
@@ -30,13 +35,15 @@ export default function Index() {
 
   return (
     <Baselayout>
+    {user &&
       <Profile profilePhoto={profilePhoto} coverPhoto={coverPhoto} handleProfilePhotoUpload={handleProfilePhotoUpload}  handleCoverPhotoUpload={handleCoverPhotoUpload}
-      username={'John Doe'}
-      designation={'Web Developer'}
-      email={"Faiza@gmail.com"}
-      contactNumber={"+923123456789"}
-      nationality={"Pakistani"}
+      username={user.name}
+      designation={user.designation}
+      email={user.email}
+      contactNumber={user.contact_number}
+      nationality={user.department}
       />
+    }
     </Baselayout>
   );
 }

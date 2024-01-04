@@ -26,8 +26,8 @@ export default function DataDisplay({data,heading}) {
         </span>
       </div>
 
-    {data.map((item) => (
-        <EditableField label={item.label} editedValue={item.value} isEditingValue={isEditingValue} handleValueBlur={handleValueBlur} />
+    {data.map((item, index) => (
+        <EditableField key={index} label={item.label} editedValue={item.value} isEditingValue={isEditingValue} handleValueBlur={handleValueBlur} />
       ))}
       </div>
   );
