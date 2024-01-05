@@ -17,10 +17,8 @@ export default function Profile({username, designation, email,contactNumber ,han
       </div>
       <div>
       <Tabs />
-      </div>
-      <div className="">
-      <Footer />
-      </div>
+
+</div>
     </div>
   );
 }

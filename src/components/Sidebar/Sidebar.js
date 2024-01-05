@@ -7,7 +7,7 @@ import {
   IoPerson,
   IoSettingsOutline,
 } from "react-icons/io5";
-import Router, { useRouter } from "next/router";
+import  { useRouter } from "next/router";
 import { MdOutlineImageSearch, MdOutlineSmartToy } from "react-icons/md";
 import { UserContext } from "@/context/UserContext/GlobalProvider";
 import { signOut } from "next-auth/react"
@@ -16,18 +16,18 @@ export default function Sidebar() {
   const router = useRouter();
   const {logoutUser} = useContext(UserContext);
   const handleProfileClick = () => {
-    Router.push("/profile");
+    router.push("/profile");
   };
 
   const handleDashboardClick = () => {
-    Router.push("/dashboard");
+    router.push("/dashboard");
 
   };
 
   const handleLogout = () => {
     logoutUser();
-    signOut();
-    Router.push("/");
+   
+    signOut( { callbackUrl: 'http://localhost:3000/' });
   };
 
 

@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DataDisplay from "../Common/DataDisplay";
-
-const qualification = [
-  {
-    label: "Latest Degree",
-    value: "BSCS",
-  },
-  {
-    label: "Institute",
-    value: "FAST",
-  },
-  {
-    label: "Year",
-    value: "2021",
-  },
-  {
-    label: "CGPA",
-    value: "3.5",
-  },
-  { label: "Field", value: "Computer Science" },
- 
-];
+import { UserContext } from "@/context/UserContext/GlobalProvider";
 
 export default function Education() {
-  const [education, setEducation] = useState(null);
+  const {user} = useContext(UserContext)
+  const [qualification, setQualification] = useState(false);
+
+useEffect(() => {
+  console.log(user)
+  const data = [
+    {
+      label: "Degree",
+      value: user.degree,
+    },
+    {
+      label: "Institute",
+      value: user.institude,
+    },
+    {
+      label: "Year",
+      value: user.completion_year,
+    },
+    {
+      label: "CGPA",
+      value: user.cgpa,
+    },
+    { label: "Field", value: user.field_of_study },
+  ]
+
+  setQualification(data);
+
+}, [user]);
+
   return (
     <div className="">
       {qualification ? (
-        <div className="flex gap-x-10">
+        <div className="flex  gap-x-10">
           <DataDisplay data={qualification} heading={"Education"} />
         </div>
       ) : (

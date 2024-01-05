@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormInput from "../Common/FormInput";
+import { useRouter } from "next/router";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ export default function Register() {
   const [qualification, setQualification] = useState("");
   const [designation, setDesignation] = useState("");
   const [cnic, setCnic] = useState("");
+  const router = useRouter();
 
   const handleRegister = async () => {
     try {
@@ -39,6 +41,9 @@ export default function Register() {
       if (response.ok) {
         // Registration successful
         console.log('Registration successful');
+        alert("Registration successful");
+        router.push("/");
+        
       } else {
         // Handle registration error
         const data = await response.json();
@@ -46,6 +51,7 @@ export default function Register() {
       }
     } catch (error) {
       console.error('Error during registration:', error);
+      alert("Error during registration");
     }
   };
 

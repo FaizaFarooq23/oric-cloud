@@ -1,45 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import DataDisplay from "../Common/DataDisplay";
-import { useSession } from "next-auth/react";
-import axios from "axios";
 import { UserContext } from "@/context/UserContext/GlobalProvider";
 
-
-
-
-// const data = [
-//   {
-//     label:"Name",
-//     value:"Faiza",
-//   },
-//   {
-//     label:"Age",
-//     value:"18",
-//   },
-//   {
-//     label:"Gender",
-//     value:"Female",
-//   },
-//   {
-//     label:"Nationality",
-//     value:"Pakistani",
-//   },
-// ]
-
-const contactInfo = [
-  {
-    label:"Email",
-    value:"Faiza123@gmail.com",
-  },
-  {
-    label:"Contact Number",
-    value:"0333-1234567",
-  },
-  {
-    label:"Address",
-    value:"Lahore",
-  },
-]
 
 function calculate_age(dob) { 
   var diff_ms = Date.now() - dob.getTime();
@@ -48,9 +10,9 @@ function calculate_age(dob) {
   return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
-
 export default function PersonalInfo() {
   const [personalInfo, setPersonalInfo] = useState(false);
+  const [contactInfo, setContactInfo] = useState(false);
   const {user} = useContext(UserContext)
 
   useEffect(() => {
@@ -78,17 +40,48 @@ export default function PersonalInfo() {
 
   }, [user]);
 
+  useEffect(() => {
+    const data = [
+      {
+        label: "Email",
+        value: user.email,
+      },
+      {
+        label: "Phone",
+        value: user.contact_number,
+      },
+      {
+        label: "Address",
+        value: user.address,
+      },
+    ];
+
+    setContactInfo(data);
+  }
+  , [user]);
+
+
+
+  useEffect(() => {
+    
+
+  }, [personalInfo]);
 
   return (
     <div className="">
       {personalInfo ? (
+        <React.Fragment>
       <div className="flex gap-x-10">  
-      <DataDisplay data={personalInfo} heading={"Personal Information"} />
+      <DataDisplay data={personalInfo} updateInfo={setPersonalInfo} heading={"Personal Information"} />
         <DataDisplay data={contactInfo} heading={"Contact Information" }/>
+        
         </div>
+        
+    </React.Fragment>
       ) : (
         <p>Loading...</p>
       )}
+
     </div>
   );
 }

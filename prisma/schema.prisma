@@ -3,7 +3,6 @@
 // After migration, run prisma generate to update the Prisma Client.
 // Also run the sql script stored in the sql folder to create triggers in the database
 
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,7 +11,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 
 model Account {
   account_number Int @id @default(autoincrement())
@@ -34,6 +32,7 @@ model Faculty {
   designation String @db.VarChar(30)
   cnic String @unique @db.VarChar(30)
   contact_number String @unique @db.VarChar(30)
+  address String @db.VarChar(255) @default("")
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 }
