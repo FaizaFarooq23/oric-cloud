@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TiTick } from 'react-icons/ti'
 
-export default function EditableField({label, isEditingValue, data, updateInfo, editedValue}) {
+export default function EditableField({label, isEditingValue, data, updateInfo, editedValue, handleValueClick}) {
   const [val, setVal] = useState(editedValue)
   const handleValueChange = (e) => {
     const updatedData = data.map(obj =>
@@ -9,6 +9,7 @@ export default function EditableField({label, isEditingValue, data, updateInfo, 
     );
 
     updateInfo(updatedData);
+    handleValueClick();
   }
 
   return (
